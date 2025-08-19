@@ -20,6 +20,54 @@ A Python script that extracts all videos from a YouTube channel and exports them
 
 ## Installation
 
+### Option 1: Docker (Recommended)
+
+The easiest way to run the script is using the pre-built Docker image:
+
+```bash
+# Pull the latest image
+docker pull ghcr.io/managedkaos/list-youtube-videos:main
+
+# Run with your API key and mount current directory for output
+docker run --rm \
+  -e YOUTUBE_API_KEY='your_api_key_here' \
+  -v "$(pwd):/work" \
+  ghcr.io/managedkaos/list-youtube-videos:main \
+  <channel_identifier>
+```
+
+**Example:**
+
+```bash
+docker run --rm \
+  -e YOUTUBE_API_KEY='your_api_key_here' \
+  -v "$(pwd):/work" \
+  ghcr.io/managedkaos/list-youtube-videos:main \
+  @DisneyMusicVEVO
+```
+
+**Windows Command Prompt:**
+
+```cmd
+docker run --rm ^
+  -e YOUTUBE_API_KEY=your_api_key_here ^
+  -v "%cd%:/work" ^
+  ghcr.io/managedkaos/list-youtube-videos:main ^
+  @DisneyMusicVEVO
+```
+
+**Windows PowerShell:**
+
+```powershell
+docker run --rm `
+  -e YOUTUBE_API_KEY='your_api_key_here' `
+  -v "${PWD}:/work" `
+  ghcr.io/managedkaos/list-youtube-videos:main `
+  @DisneyMusicVEVO
+```
+
+### Option 2: Local Installation
+
 1. **Clone or download the script**
 
 2. **Install required dependencies:**
@@ -61,11 +109,60 @@ A Python script that extracts all videos from a YouTube channel and exports them
 
 ## Usage
 
+### Docker Usage (Recommended)
+
 ```bash
-python youtube_scraper.py <channel_identifier>
+docker run --rm \
+  -e YOUTUBE_API_KEY='your_api_key_here' \
+  -v "$(pwd):/work" \
+  ghcr.io/managedkaos/list-youtube-videos:main \
+  <channel_identifier>
+```
+
+> ![Tip]
+> When using Docker, the `-v "$(pwd):/work"` flag mounts your current directory to `/work` inside the container.
+>
+> This ensures that CSV files are saved to your local directory** and persist after the container stops
+> Make sure you're in the directory where you want the CSV files to be saved before running the Docker command.
+
+### Local Usage
+
+```bash
+python main.py <channel_identifier>
 ```
 
 ### Examples
+
+**Using Docker:**
+
+```bash
+# Using channel username (legacy format)
+docker run --rm \
+  -e YOUTUBE_API_KEY='your_api_key_here' \
+  -v "$(pwd):/work" \
+  ghcr.io/managedkaos/list-youtube-videos:main \
+  DisneyMusicVEVO
+```
+
+```bash
+# Using channel handle (new format)
+docker run --rm \
+  -e YOUTUBE_API_KEY='your_api_key_here' \
+  -v "$(pwd):/work" \
+  ghcr.io/managedkaos/list-youtube-videos:main \
+  @DisneyMusicVEVO
+```
+
+```bash
+# Using channel ID (starts with UC)
+docker run --rm \
+  -e YOUTUBE_API_KEY='your_api_key_here' \
+  -v "$(pwd):/work" \
+  ghcr.io/managedkaos/list-youtube-videos:main \
+  UC1234567890abcdefg
+```
+
+**Using Local Installation:**
 
 ```bash
 # Using channel username (legacy format)
@@ -120,6 +217,22 @@ Monitor your usage in the Google Cloud Console to avoid hitting quota limits.
 ## Troubleshooting
 
 ### Common Issues
+
+#### Docker Issues
+
+1. **"Permission denied" when mounting volume**
+   - Ensure you have read/write permissions in the current directory
+   - Try running with `sudo` if needed (Linux/Mac)
+
+2. **"No such file or directory" for volume mount**
+   - Make sure you're in the correct directory before running the command
+   - Use absolute paths if needed: `-v "/full/path/to/directory:work"`
+
+3. **CSV file not appearing in local directory**
+   - Check that the volume mount path is correct
+   - Verify the container has write permissions to the mounted directory
+
+#### General Issues
 
 1. **"YOUTUBE_API_KEY environment variable not set"**
    - Make sure you've set the environment variable correctly
