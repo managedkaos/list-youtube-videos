@@ -23,6 +23,7 @@ A Python script that extracts all videos from a YouTube channel and exports them
 1. **Clone or download the script**
 
 2. **Install required dependencies:**
+
    ```bash
    pip install google-api-python-client
    ```
@@ -37,18 +38,21 @@ A Python script that extracts all videos from a YouTube channel and exports them
 4. **Set up your API key as an environment variable:**
 
    **Linux/Mac:**
+
    ```bash
-   export YOUTUBE_API_KEY='your_actual_api_key_here'
+   export YOUTUBE_API_KEY='your_api_key_here'
    ```
-   
+
    **Windows Command Prompt:**
+
    ```cmd
-   set YOUTUBE_API_KEY=your_actual_api_key_here
+   set YOUTUBE_API_KEY=your_actual_api_key_here  # nosec
    ```
-   
+
    **Windows PowerShell:**
+
    ```powershell
-   $env:YOUTUBE_API_KEY='your_actual_api_key_here'
+   $env:YOUTUBE_API_KEY='your_actual_api_key_here'  # nosec
    ```
 
    **For permanent setup:**
@@ -87,6 +91,7 @@ The script creates a CSV file named `{channel_name}_videos.csv` with the followi
 - **Video_ID**: YouTube video ID
 
 ### Sample Output
+
 ```csv
 Title,URL,Published,Video_ID
 "Let It Go (from Frozen)",https://www.youtube.com/watch?v=L0MK7qz13bU,2013-12-17T16:00:01Z,L0MK7qz13bU
@@ -139,4 +144,3 @@ If you're unsure about the channel identifier:
 - Visit the channel page on YouTube
 - Check the URL: `youtube.com/c/ChannelName` or `youtube.com/@ChannelHandle`
 - Use the visible channel name or handle as the identifier
-
