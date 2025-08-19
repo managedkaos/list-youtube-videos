@@ -94,13 +94,13 @@ docker run --rm `
    **Windows Command Prompt:**
 
    ```cmd
-   set YOUTUBE_API_KEY=your_actual_api_key_here  # nosec
+   set YOUTUBE_API_KEY=your_api_key_here  # nosec
    ```
 
    **Windows PowerShell:**
 
    ```powershell
-   $env:YOUTUBE_API_KEY='your_actual_api_key_here'  # nosec
+   $env:YOUTUBE_API_KEY='your_api_key_here'  # nosec
    ```
 
    **For permanent setup:**
