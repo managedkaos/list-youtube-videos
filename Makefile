@@ -27,7 +27,6 @@ development-requirements: requirements
 
 pre-commit-install: development-requirements
 	pre-commit install
-	detect-secrets scan > .secrets.baseline
 
 pre-commit-update: development-requirements
 	pre-commit autoupdate
