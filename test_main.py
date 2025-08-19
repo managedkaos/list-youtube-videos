@@ -292,9 +292,17 @@ class TestGetChannelVideos(unittest.TestCase):
         get_channel_videos(self.channel_id, self.api_key, self.output_filename)
         # Function returns None, which is expected behavior
 
-    def test_get_channel_videos_invalid_api_key(self):
+    @patch("main.build")
+    def test_get_channel_videos_invalid_api_key(self, mock_build):
         """Test get_channel_videos with invalid API key"""
-        # This test verifies the function handles invalid API keys gracefully
+        # Mock an authentication error for invalid API key
+        from googleapiclient.errors import HttpError
+
+        mock_build.side_effect = HttpError(
+            resp=MagicMock(status=401), content=b"Unauthorized"
+        )
+
+        # This should not raise an exception, just handle the error
         get_channel_videos(self.channel_id, "", self.output_filename)
         # Function returns None, which is expected behavior
 

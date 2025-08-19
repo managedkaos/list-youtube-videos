@@ -22,9 +22,8 @@ def get_channel_videos(
         output_filename: Output CSV filename
     """
 
-    youtube = build("youtube", "v3", developerKey=api_key)
-
     try:
+        youtube = build("youtube", "v3", developerKey=api_key)
         # Try different methods to find the channel
         channel_id = None
 
