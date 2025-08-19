@@ -22,6 +22,9 @@ help:
 
 all: requirements lint test pre-commit-run build
 
+requirements:
+	pip install --quiet --upgrade --requirement requirements.txt
+
 development-requirements: requirements
 	pip install --quiet --upgrade --requirement development-requirements.txt
 
