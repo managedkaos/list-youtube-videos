@@ -27,6 +27,7 @@ requirements:
 
 development-requirements: requirements
 	pip install --quiet --upgrade --requirement development-requirements.txt
+	docker pull davidanson/markdownlint-cli2:v0.13.0
 
 pre-commit-install: development-requirements
 	pre-commit install
@@ -46,6 +47,7 @@ lint:
 	pylint --errors-only --disable=C0301 *.py
 	black --diff *.py
 	isort --check-only --diff *.py
+	docker run -v $(PWD):/workdir davidanson/markdownlint-cli2:v0.13.0 README.md 2>&1
 
 fmt: black isort
 
